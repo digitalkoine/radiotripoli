@@ -7,6 +7,8 @@ Struttura del progetto:
 - `data/places.json`
 - `data/memos.json`
 
+## Link to  the map: https://digitalkoine.github.io/radiotripoli/
+
 ## Avvio locale consigliato
 Per caricare correttamente i file JSON, apri la cartella con un piccolo server locale invece di fare doppio click su `index.html`.
 
