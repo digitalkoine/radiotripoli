@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Remembering Jewish Tripoli</title>
+  <title>Ricordando la Tripoli ebraica</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -40,13 +40,13 @@
       </div>
     </div>
     <div class="panel-heading">
-      <h1 data-i18n="title">Remembering Jewish Tripoli</h1>
+      <h1 data-i18n="title">Ricordando la Tripoli ebraica</h1>
     </div>
-    <p class="panel-intro" data-i18n="intro">Turn on the radio and cross the city: at the red points, memories of those who lived it surface; at the blue points, other places of Tripoli Jewish life are revealed.</p>
+    <p class="panel-intro" data-i18n="intro">Accendi la radio e attraversa la città: nei punti rossi affiorano le memorie di chi l'ha vissuta, nei punti blu si rivelano altri luoghi della vita ebraica tripolina.</p>
     <div class="controls">
       <label for="powerSwitch" class="power-control">
         <span data-i18n="radio">Radio</span>
-        <span id="powerLabel">OFF</span>
+        <span id="powerLabel">SPENTA</span>
         <span class="power-shell">
           <input id="powerSwitch" type="checkbox" />
           <span class="power-track">
@@ -54,10 +54,10 @@
           </span>
         </span>
       </label>
-      <button id="fitBtn" class="secondary" data-i18n="fit">Reset view</button>
+      <button id="fitBtn" class="secondary" data-i18n="fit">Reset vista</button>
     </div>
     <div class="route-tools">
-      <label for="routeSelect" data-i18n="route">Filters</label>
+      <label for="routeSelect" data-i18n="route">Filtri</label>
       <select id="routeSelect"></select>
       <button id="routeResetBtn" class="secondary" data-i18n="routeReset">Reset</button>
       <div id="routeGuide" class="route-guide"></div>
@@ -66,8 +66,8 @@
   </div>
 
   <div class="legend">
-    <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memories of places</span></div>
-    <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Places of Tripoli's Jews</span></div>
+    <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memorie dei luoghi</span></div>
+    <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Luoghi degli ebrei di Tripoli</span></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

@@ -23,7 +23,9 @@ async function loadJson(path) {
   ]);
 
   const params = new URLSearchParams(window.location.search);
-  const lang = params.get('lang') === 'en' ? 'en' : 'it';
+  const documentLang = document.documentElement.lang.toLowerCase().startsWith('it') ? 'it' : 'en';
+  const requestedLang = params.get('lang');
+  const lang = requestedLang === 'it' || requestedLang === 'en' ? requestedLang : documentLang;
   const TEXT = {
     it: {
       title: 'Ricordando la Tripoli ebraica',
