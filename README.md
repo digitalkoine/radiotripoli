@@ -1,4 +1,4 @@
-# Tripoli Jewish Memory Map
+# Ricordando la Tripoli ebraica / Remembering Jewish Tripoli
 
 Struttura del progetto:
 - `index.html`
@@ -26,4 +26,4 @@ Poi apri nel browser:
 ## Nota
 La mappa usa Leaflet da CDN e i dati del foglio `NEW sample data`.
 Le versioni linguistiche si aprono con `?lang=it` e `?lang=en`.
-Il basemap predefinito è ArcGIS/Esri World Street Map; dal pannello si può tornare a CARTO Voyager o OpenStreetMap HOT.
+Il basemap predefinito è ArcGIS/Esri World Street Map.

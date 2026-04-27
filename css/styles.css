@@ -148,10 +148,7 @@ html, body {
       box-shadow: 0 0 0 1px rgba(58,35,16,0.65);
     }
     .panel-heading {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: start;
+      display: block;
     }
     .panel h1 {
       font-size: 16px;
@@ -195,6 +192,7 @@ html, body {
       color: #2a1b0f;
     }
     .status {
+      display: none;
       margin-top: 8px;
       padding: 9px 10px;
       background: linear-gradient(180deg, rgba(28,35,25,0.9), rgba(45,58,40,0.88));
@@ -204,6 +202,9 @@ html, body {
       line-height: 1.35;
       color: #dce8c3;
       box-shadow: inset 0 0 18px rgba(170, 255, 120, 0.04);
+    }
+    .status.is-visible {
+      display: block;
     }
     .controls {
       display: flex;
@@ -311,24 +312,6 @@ html, body {
     .route-guide.active {
       display: block;
     }
-    .route-guide-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .route-guide-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--route-accent, #ffe69a);
-      color: #2a1b0f;
-      box-shadow: 0 0 0 2px rgba(42,27,15,0.28);
-      flex: 0 0 auto;
-    }
     .route-community {
       --route-accent: #86d0bd;
     }
@@ -341,23 +324,16 @@ html, body {
     .route-departure {
       --route-accent: #9bb9e9;
     }
-    .route-icon-svg {
-      width: 13px;
-      height: 13px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .filter-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 5px;
     }
-    .route-guide-step {
+    .filter-list li {
       color: rgba(248,233,200,0.92);
-      margin-top: 6px;
-    }
-    .route-points {
-      margin-top: 6px;
-      color: rgba(248,233,200,0.82);
+      font-weight: 700;
     }
     #routeResetBtn {
       padding: 7px 10px;
@@ -439,13 +415,12 @@ html, body {
       border-radius: 50%;
       background: var(--route-accent, #ffe69a);
       color: #2a1b0f;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.45),
         0 0 0 1px rgba(42,27,15,0.28);
-    }
-    .route-icon-badge .route-icon-svg {
-      width: 12px;
-      height: 12px;
     }
     .leaflet-popup-pane {
       z-index: 760 !important;
@@ -484,21 +459,22 @@ html, body {
     .popup-topic p {
       font-weight: 700;
     }
-    .popup-testimony,
-    .popup-audio {
+    .popup-witness {
+      font-weight: 800;
+    }
+    .popup-reading {
       border-top: 1px solid #e4e4e4;
       margin-top: 8px;
       padding-top: 8px;
     }
-    .popup-testimony summary,
-    .popup-audio summary {
+    .popup-reading summary {
       cursor: pointer;
       color: #555;
       font-size: 12px;
       font-weight: 800;
       margin-bottom: 6px;
     }
-    .popup-testimony p {
+    .popup-reading p {
       max-height: 150px;
       overflow: auto;
       padding-right: 4px;

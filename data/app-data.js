@@ -3,7 +3,7 @@ globalThis.TRIPOLI_DATA = {
     {
       "kind": "place",
       "locationIt": "Cimitero Ebraico",
-      "locationEn": "Jewish Cemetary",
+      "locationEn": "Jewish Cemetery",
       "topicIt": "Vita comunitaria",
       "topicEn": "Community life",
       "contextIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
@@ -11,7 +11,7 @@ globalThis.TRIPOLI_DATA = {
       "lat": 13.165081113219362,
       "lon": 32.89593878995753,
       "title": "Community life",
-      "specificLocation": "Jewish Cemetary",
+      "specificLocation": "Jewish Cemetery",
       "descriptionIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
       "descriptionEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },

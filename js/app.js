@@ -26,14 +26,14 @@ async function loadJson(path) {
   const lang = params.get('lang') === 'en' ? 'en' : 'it';
   const TEXT = {
     it: {
-      title: 'Tripoli Jewish Memory Map',
-      intro: 'Accendi la radio e attraversa la mappa: i punti rossi attivano le testimonianze sonore, i punti blu aprono i luoghi di interesse.',
+      title: 'Ricordando la Tripoli ebraica',
+      intro: "Accendi la radio e attraversa la città: nei punti rossi affiorano le memorie di chi l'ha vissuta, nei punti blu si rivelano altri luoghi della vita ebraica tripolina.",
       radio: 'Radio',
-      fit: 'Inquadra punti',
+      fit: 'Reset vista',
       basemap: 'Mappa',
-      route: 'Percorso',
-      legendPlaces: 'Luoghi di interesse',
-      legendMemos: 'Memorie sui luoghi di interesse',
+      route: 'Filtri',
+      legendPlaces: 'Luoghi degli ebrei di Tripoli',
+      legendMemos: 'Memorie dei luoghi',
       on: 'ACCESA',
       off: 'SPENTA',
       statusOff: 'Radio spenta. Accendila dal pannello e poi esplora la mappa passando con il mouse.',
@@ -56,10 +56,10 @@ async function loadJson(path) {
       mapCarto: 'Chiara OSM',
       mapOsmHot: 'OpenStreetMap locale',
       routeAll: 'Tutti i punti',
-      routeCommunity: 'Abitare la comunità',
-      routeEducation: 'Scuola e vita italiana',
-      routeSocial: 'Socialità e musica',
-      routeDeparture: 'Partire da Tripoli',
+      routeCommunity: 'Filtro A',
+      routeEducation: 'Filtro B',
+      routeSocial: 'Filtro C',
+      routeDeparture: 'Filtro D',
       routeAllIntro: 'Mostra tutti i luoghi e tutte le memorie.',
       routeCommunityIntro: 'Dalla hara ai riti e ai luoghi comunitari: la città come spazio quotidiano e religioso.',
       routeEducationIntro: 'Scuole, gallerie e istituzioni italiane: il rapporto tra formazione, città coloniale e vita ebraica.',
@@ -69,17 +69,20 @@ async function loadJson(path) {
       routeExplore: 'Esplora liberamente la mappa: i punti del percorso restano in evidenza.',
       routeReset: 'Reset',
       testimony: 'Testimonianza',
+      testimonyBy: 'Testimonianza di',
+      read: 'Leggi',
+      transcript: 'Trascrizione',
       audioClip: 'Audio'
     },
     en: {
-      title: 'Tripoli Jewish Memory Map',
-      intro: 'Turn on the radio and move across the map: red points trigger audio memories, blue points open places of interest.',
+      title: 'Remembering Jewish Tripoli',
+      intro: 'Turn on the radio and cross the city: at the red points, memories of those who lived it surface; at the blue points, other places of Tripoli Jewish life are revealed.',
       radio: 'Radio',
-      fit: 'Fit points',
+      fit: 'Reset view',
       basemap: 'Map',
-      route: 'Route',
-      legendPlaces: 'Places of interest',
-      legendMemos: 'Memories about places of interest',
+      route: 'Filters',
+      legendPlaces: "Places of Tripoli's Jews",
+      legendMemos: 'Memories of places',
       on: 'ON',
       off: 'OFF',
       statusOff: 'Radio off. Turn it on from the panel, then explore the map with the mouse.',
@@ -102,10 +105,10 @@ async function loadJson(path) {
       mapCarto: 'Light OSM',
       mapOsmHot: 'Local OpenStreetMap',
       routeAll: 'All points',
-      routeCommunity: 'Living the community',
-      routeEducation: 'School and Italian life',
-      routeSocial: 'Social life and music',
-      routeDeparture: 'Leaving Tripoli',
+      routeCommunity: 'Filter A',
+      routeEducation: 'Filter B',
+      routeSocial: 'Filter C',
+      routeDeparture: 'Filter D',
       routeAllIntro: 'Show all places and all memories.',
       routeCommunityIntro: 'From the hara to rituals and community places: the city as everyday and religious space.',
       routeEducationIntro: 'Schools, galleries, and Italian institutions: education, the colonial city, and Jewish life.',
@@ -115,52 +118,28 @@ async function loadJson(path) {
       routeExplore: 'Explore the map freely: the route points stay highlighted.',
       routeReset: 'Reset',
       testimony: 'Testimony',
+      testimonyBy: 'Testimony by',
+      read: 'Read',
+      transcript: 'Transcript',
       audioClip: 'Audio'
     }
   };
   const t = key => TEXT[lang][key] || TEXT.it[key] || key;
-  const ROUTE_COLORS = {
-    community: '#86d0bd',
-    education: '#f0c76c',
-    social: '#d7a0df',
-    departure: '#9bb9e9'
+  const FILTER_BADGES = {
+    community: 'A',
+    education: 'B',
+    social: 'C',
+    departure: 'D'
   };
 
-  function routeColor(key) {
-    return ROUTE_COLORS[key] || '#ffe69a';
-  }
-
-  function routeIconSvg(key) {
-    const icons = {
-      community: `
-        <path d="M3.2 12.2V7.4L8 3.3l4.8 4.1v4.8" />
-        <path d="M6.3 12.2V8.7h3.4v3.5" />
-        <path d="M2.3 12.2h11.4" />
-      `,
-      education: `
-        <path d="M3.2 4.2c1.7-.8 3.3-.8 4.8 0v8.2c-1.5-.8-3.1-.8-4.8 0V4.2z" />
-        <path d="M8 4.2c1.5-.8 3.1-.8 4.8 0v8.2c-1.7-.8-3.3-.8-4.8 0V4.2z" />
-        <path d="M8 4.2v8.2" />
-      `,
-      social: `
-        <path d="M9.3 3.6v6.6" />
-        <path d="M9.3 4.6l3.5-.9v2.4L9.3 7" />
-        <circle cx="6.5" cy="10.9" r="1.7" />
-      `,
-      departure: `
-        <path d="M4.1 9.4h7.8l-1.3 2H5.4L4.1 9.4z" />
-        <path d="M6 9.4V5.5h3.1l2 2H7.8" />
-        <path d="M3.2 12.7c.8.4 1.6.4 2.4 0 .8.4 1.6.4 2.4 0 .8.4 1.6.4 2.4 0 .8.4 1.6.4 2.4 0" />
-      `
-    };
-    const icon = icons[key] || icons.community;
-    return `<svg class="route-icon-svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false">${icon}</svg>`;
+  function filterBadge(key) {
+    return FILTER_BADGES[key] || '';
   }
 
   document.documentElement.lang = lang;
   document.title = lang === 'en'
-    ? 'Tripoli Jewish Memory Map – audio prototype'
-    : 'Tripoli Jewish Memory Map – prototipo audio';
+    ? 'Remembering Jewish Tripoli'
+    : 'Ricordando la Tripoli ebraica';
 
   function urlWithParam(key, value) {
     const url = new URL(window.location.href);
@@ -261,7 +240,7 @@ async function loadJson(path) {
       if (baseLayer && map.hasLayer(baseLayer)) map.removeLayer(baseLayer);
       activeBasemapKey = 'osmFallback';
       baseLayer = basemaps.osmFallback().addTo(map);
-      updateStatus(t('statusTileFallback'));
+      updateStatus(t('statusTileFallback'), true);
     });
     if (basemapSelect && basemapSelect.value !== key && key !== 'osmFallback') {
       basemapSelect.value = key;
@@ -331,13 +310,27 @@ async function loadJson(path) {
     return `<p class="source"><strong>${t('source')}:</strong> ${escapeHtml(source)}</p>`;
   }
 
-  function renderDetailsBlock(label, text, className) {
-    const content = String(text || '').trim();
-    if (!content) return '';
+  function witnessName(item) {
+    const source = localized(item, 'sourceIt', 'sourceEn', 'source');
+    const match = source.match(/(?:Intervista a|Interview with)\s+([^,]+)/i);
+    return match ? match[1].trim() : '';
+  }
+
+  function renderMemoReadBlock(testimony, source) {
+    const transcript = String(testimony || '').trim();
+    const sourceText = String(source || '').trim();
+    if (!transcript && !sourceText) return '';
+    const transcriptBlock = transcript
+      ? `<p><strong>${escapeHtml(t('transcript'))}</strong><br>${escapeHtml(transcript)}</p>`
+      : '';
+    const sourceBlock = sourceText
+      ? `<p class="source"><strong>${escapeHtml(t('source'))}:</strong> ${escapeHtml(sourceText)}</p>`
+      : '';
     return `
-      <details class="${className}">
-        <summary>${escapeHtml(label)}</summary>
-        <p>${escapeHtml(content)}</p>
+      <details class="popup-reading">
+        <summary>${escapeHtml(t('read'))}</summary>
+        ${transcriptBlock}
+        ${sourceBlock}
       </details>
     `;
   }
@@ -347,13 +340,13 @@ async function loadJson(path) {
     const topic = localized(item, 'topicIt', 'topicEn', 'title');
     const context = localized(item, 'contextIt', 'contextEn', 'description');
     const testimony = localized(item, 'testimonyIt', 'testimonyEn', 'descriptionIt');
+    const source = localized(item, 'sourceIt', 'sourceEn', 'source');
+    const witness = witnessName(item);
     const years = item.years ? `<div class="meta">${escapeHtml(item.years)}</div>` : '';
-    const testimonyBlock = isMemo
-      ? renderDetailsBlock(t('testimony'), testimony, 'popup-testimony')
+    const witnessBlock = isMemo
+      ? `<p class="popup-witness">${escapeHtml(witness ? `${t('testimonyBy')} ${witness}` : t('testimony'))}</p>`
       : '';
-    const audio = isMemo && item.audioUrl
-      ? `<details class="popup-audio"><summary>${escapeHtml(t('audioClip'))}</summary><audio controls preload="metadata" src="${escapeHtml(item.audioUrl)}"></audio></details>`
-      : '';
+    const readBlock = isMemo ? renderMemoReadBlock(testimony, source) : renderSource(item);
 
     return `
       <div class="popup-content">
@@ -361,9 +354,8 @@ async function loadJson(path) {
         ${years}
         ${renderTextBlock(topic, 'popup-topic')}
         ${renderTextBlock(context, 'popup-context', { maxLength: 170 })}
-        ${testimonyBlock}
-        ${renderSource(item)}
-        ${audio}
+        ${witnessBlock}
+        ${readBlock}
       </div>
     `;
   }
@@ -417,26 +409,6 @@ async function loadJson(path) {
   });
 
   const hotspotLayer = L.layerGroup(audioHotspots).addTo(map);
-  const routeRenderer = L.svg({ padding: 0.5 });
-  const routeLineHalo = L.polyline([], {
-    renderer: routeRenderer,
-    color: '#2a1b0f',
-    weight: 9,
-    opacity: 0,
-    lineCap: 'round',
-    lineJoin: 'round',
-    interactive: false
-  }).addTo(map);
-  const routeLine = L.polyline([], {
-    renderer: routeRenderer,
-    color: '#ffe69a',
-    weight: 4,
-    opacity: 0,
-    dashArray: '10 8',
-    lineCap: 'round',
-    lineJoin: 'round',
-    interactive: false
-  }).addTo(map);
   const routeSelect = document.getElementById('routeSelect');
   const routeResetBtn = document.getElementById('routeResetBtn');
   const routeGuide = document.getElementById('routeGuide');
@@ -453,7 +425,7 @@ async function loadJson(path) {
     education: {
       label: t('routeEducation'),
       intro: t('routeEducationIntro'),
-      keywords: ['scuola', 'school', 'scuole', 'education', 'dante', 'roma', 'galleria de bono', 'de bono gallery']
+      keywords: ['scuola', 'school', 'scuole', 'education', 'dante', 'roma']
     },
     social: {
       label: t('routeSocial'),
@@ -496,7 +468,7 @@ async function loadJson(path) {
     const routeClass = routeKey !== 'all' && active ? ' in-route' : '';
     const dimClass = routeKey !== 'all' && !active ? ' dimmed-route' : '';
     const iconText = routeKey !== 'all' && active
-      ? `<span class="route-icon-badge route-${routeKey}">${routeIconSvg(routeKey)}</span>`
+      ? `<span class="route-icon-badge route-${routeKey}">${escapeHtml(filterBadge(routeKey))}</span>`
       : '';
     const baseClass = entry.kind === 'place' ? 'custom-place-icon' : 'custom-memo-icon';
     const icon = L.divIcon({
@@ -517,14 +489,12 @@ async function loadJson(path) {
       return;
     }
 
-    const route = routeText[routeState.key];
-    const points = routeState.entries.map(entry => entryLabel(entry)).join(' · ');
+    const points = routeState.entries
+      .map(entry => `<li>${escapeHtml(entryLabel(entry))}</li>`)
+      .join('');
     routeGuide.classList.add('active');
     routeGuide.innerHTML = `
-      <div class="route-guide-title"><span class="route-guide-icon route-${routeState.key}">${routeIconSvg(routeState.key)}</span>${escapeHtml(route.label)}</div>
-      <div>${escapeHtml(route.intro)}</div>
-      <div class="route-guide-step">${escapeHtml(t('routeExplore'))}</div>
-      <div class="route-points">${escapeHtml(t('routeHighlight'))}: ${escapeHtml(points)}</div>
+      <ul class="filter-list">${points}</ul>
     `;
   }
 
@@ -547,21 +517,6 @@ async function loadJson(path) {
     if (routeSelect && routeSelect.value !== routeState.key) routeSelect.value = routeState.key;
     if (routeResetBtn) routeResetBtn.disabled = routeState.key === 'all';
     updateRouteGuide();
-
-    if (routeState.key === 'all' || routeState.entries.length < 2) {
-      routeLineHalo.setLatLngs([]);
-      routeLineHalo.setStyle({ opacity: 0 });
-      routeLine.setLatLngs([]);
-      routeLine.setStyle({ opacity: 0 });
-    } else {
-      const routeLatLngs = routeState.entries.map(entry => entry.marker.getLatLng());
-      routeLineHalo.setLatLngs(routeLatLngs);
-      routeLine.setLatLngs(routeLatLngs);
-      routeLineHalo.setStyle({ opacity: 0.55 });
-      routeLine.setStyle({ color: routeColor(routeState.key), opacity: 0.98 });
-      routeLineHalo.bringToFront();
-      routeLine.bringToFront();
-    }
 
     if (routeState.key === 'all') {
       closeAllMemoPopups();
@@ -639,8 +594,11 @@ async function loadJson(path) {
     return t * t * (3 - 2 * t);
   }
 
-  function updateStatus(text) {
-    document.getElementById('status').innerHTML = text;
+  function updateStatus(text, visible = false) {
+    const status = document.getElementById('status');
+    if (!status) return;
+    status.innerHTML = text;
+    status.classList.toggle('is-visible', visible);
   }
 
   function ensureRadioNoise() {
@@ -806,7 +764,7 @@ async function loadJson(path) {
 
     const ok = ensureRadioNoise();
     if (!ok) {
-      updateStatus(t('statusNoWebAudio'));
+      updateStatus(t('statusNoWebAudio'), true);
       return false;
     }
 
@@ -836,7 +794,7 @@ async function loadJson(path) {
     if (lastPointerLatLng) updatePointerAudioModel();
 
     if (started === 0) {
-      updateStatus(t('statusAudioBlocked'));
+      updateStatus(t('statusAudioBlocked'), true);
     }
     return true;
   }
@@ -991,7 +949,7 @@ async function loadJson(path) {
     closeAllMemoPopups();
     closeAllPlacePopups();
     syncNeedle(null);
-    updateStatus(t('statusMouseOut'));
+    updateStatus('');
   });
 
   map.on('move zoom', () => {
@@ -1025,5 +983,6 @@ async function loadJson(path) {
         ? 'Reload the page or check that Leaflet and the basemap tiles are reachable.'
         : 'Ricarica la pagina o controlla che Leaflet e le tile della mappa siano raggiungibili.');
     status.innerHTML = `${isEnglish ? 'Map loading error.' : 'Errore nel caricamento della mappa.'} ${localHint}`;
+    status.classList.add('is-visible');
   }
 });

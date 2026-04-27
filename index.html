@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tripoli Jewish Memory Map – audio prototype</title>
+  <title>Ricordando la Tripoli ebraica</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -40,13 +40,9 @@
       </div>
     </div>
     <div class="panel-heading">
-      <h1 data-i18n="title">Tripoli Jewish Memory Map</h1>
-      <div class="language-switch" aria-label="Language">
-        <a id="langIt" href="?lang=it">IT</a>
-        <a id="langEn" href="?lang=en">EN</a>
-      </div>
+      <h1 data-i18n="title">Ricordando la Tripoli ebraica</h1>
     </div>
-    <p class="panel-intro" data-i18n="intro">Accendi la radio e attraversa la mappa: i punti rossi attivano le testimonianze sonore, i punti blu aprono i luoghi di interesse.</p>
+    <p class="panel-intro" data-i18n="intro">Accendi la radio e attraversa la città: nei punti rossi affiorano le memorie di chi l'ha vissuta, nei punti blu si rivelano altri luoghi della vita ebraica tripolina.</p>
     <div class="controls">
       <label for="powerSwitch" class="power-control">
         <span data-i18n="radio">Radio</span>
@@ -58,24 +54,20 @@
           </span>
         </span>
       </label>
-      <button id="fitBtn" class="secondary" data-i18n="fit">Inquadra punti</button>
-    </div>
-    <div class="map-tools">
-      <label for="basemapSelect" data-i18n="basemap">Mappa</label>
-      <select id="basemapSelect"></select>
+      <button id="fitBtn" class="secondary" data-i18n="fit">Reset vista</button>
     </div>
     <div class="route-tools">
-      <label for="routeSelect" data-i18n="route">Percorso</label>
+      <label for="routeSelect" data-i18n="route">Filtri</label>
       <select id="routeSelect"></select>
       <button id="routeResetBtn" class="secondary" data-i18n="routeReset">Reset</button>
       <div id="routeGuide" class="route-guide"></div>
     </div>
-    <div id="status" class="status">Radio spenta. Accendila dal pannello e poi esplora la mappa passando con il mouse.</div>
+    <div id="status" class="status" aria-live="polite"></div>
   </div>
 
   <div class="legend">
-    <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Luoghi di interesse</span></div>
-    <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memorie sui luoghi di interesse</span></div>
+    <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memorie dei luoghi</span></div>
+    <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Luoghi degli ebrei di Tripoli</span></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
