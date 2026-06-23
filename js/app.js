@@ -359,7 +359,7 @@ async function loadJson(path) {
     marker.on('mouseover', () => { marker.openPopup(); });
     marker.on('click', () => { marker.openPopup(); });
     marker.addTo(placesLayer);
-    const entry = { item, marker, kind: 'place' };
+    const entry = { item, marker, layer: placesLayer, kind: 'place', routeActive: true };
     placeMarkers.push(entry);
     allMarkerEntries.push(entry);
   });
@@ -408,7 +408,15 @@ async function loadJson(path) {
     });
     audioHotspots.push(hotspot);
 
-    const entry = { item, marker, audio, hotspot, kind: 'memo' };
+    const entry = {
+      item,
+      marker,
+      layer: memosLayer,
+      audio,
+      hotspot,
+      kind: 'memo',
+      routeActive: true
+    };
     memoMarkers.push(entry);
     allMarkerEntries.push(entry);
   });
@@ -468,7 +476,7 @@ async function loadJson(path) {
   function setSelectedRouteKeys(keys) {
     const uniqueKeys = routeOrder.filter(key => keys.includes(key));
     routeState.keys = uniqueKeys.length ? uniqueKeys : [...routeOrder];
-    applyRoute();
+    applyRoute(true);
   }
 
   function toggleRoute(key) {
@@ -524,14 +532,13 @@ async function loadJson(path) {
     const routeKey = entryRouteKey(entry.item);
     const filtered = !isAllRoute();
     const routeClass = filtered && active ? ' in-route' : '';
-    const dimClass = filtered && !active ? ' dimmed-route' : '';
     const iconText = filtered && active
       ? `<span class="route-icon-badge route-${routeKey}">${escapeHtml(filterBadge(routeKey))}</span>`
       : '';
     const baseClass = entry.kind === 'place' ? 'custom-place-icon' : 'custom-memo-icon';
     const icon = L.divIcon({
       className: '',
-      html: `<div class="${baseClass}${routeClass}${dimClass}">${iconText}</div>`,
+      html: `<div class="${baseClass}${routeClass}">${iconText}</div>`,
       iconSize: [22, 22],
       iconAnchor: [11, 11],
       popupAnchor: [0, -10]
@@ -564,26 +571,40 @@ async function loadJson(path) {
     `;
   }
 
-  function applyRoute() {
+  function applyRoute(refreshAudio = false) {
     routeState.entries = isAllRoute()
       ? allMarkerEntries
       : allMarkerEntries.filter(entry => routeState.keys.includes(entryRouteKey(entry.item)));
 
     allMarkerEntries.forEach(entry => {
       const active = isAllRoute() || routeState.entries.includes(entry);
-      entry.marker.setOpacity(active ? 1 : 0.22);
+      entry.routeActive = active;
       setRouteMarkerIcon(entry, active);
-      if (!active) entry.marker.closePopup();
+
+      if (active) {
+        if (!entry.layer.hasLayer(entry.marker)) entry.layer.addLayer(entry.marker);
+      } else {
+        entry.marker.closePopup();
+        if (entry.layer.hasLayer(entry.marker)) entry.layer.removeLayer(entry.marker);
+        if (entry.audio) entry.audio.volume = 0;
+      }
+
       if (entry.hotspot) {
-        entry.hotspot.setStyle({
-          opacity: active ? 0.22 : 0.05,
-          fillOpacity: active ? 0.035 : 0.008
-        });
+        if (active) {
+          entry.hotspot.setStyle({ opacity: 0.22, fillOpacity: 0.035 });
+          if (!hotspotLayer.hasLayer(entry.hotspot)) hotspotLayer.addLayer(entry.hotspot);
+        } else if (hotspotLayer.hasLayer(entry.hotspot)) {
+          hotspotLayer.removeLayer(entry.hotspot);
+        }
       }
     });
 
     syncRouteControls();
     updateRouteGuide();
+
+    if (refreshAudio && audioEnabled && radioPowered && lastPointerLatLng) {
+      updatePointerAudioModel();
+    }
   }
 
   const allBounds = L.featureGroup([...placesLayer.getLayers(), ...memosLayer.getLayers()]).getBounds();
@@ -859,6 +880,7 @@ async function loadJson(path) {
     let nearestDistance = Infinity;
 
     memoMarkers.forEach((entry, index) => {
+      if (!entry.routeActive) return;
       const d = haversineKm(latlng.lat, latlng.lng, entry.item.lon, entry.item.lat);
       if (d < nearestDistance) {
         nearestDistance = d;
@@ -876,6 +898,7 @@ async function loadJson(path) {
     let nearestDistance = Infinity;
 
     placeMarkers.forEach((entry, index) => {
+      if (!entry.routeActive) return;
       const d = haversineKm(latlng.lat, latlng.lng, entry.item.lon, entry.item.lat);
       if (d < nearestDistance) {
         nearestDistance = d;
@@ -895,7 +918,8 @@ async function loadJson(path) {
   function updateMemoPopupModel() {
     if (activeMemoIndex < 0 || !lastPointerLatLng) return;
     const activeEntry = memoMarkers[activeMemoIndex];
-    if (!activeEntry) {
+    if (!activeEntry || !activeEntry.routeActive) {
+      if (activeEntry) activeEntry.marker.closePopup();
       activeMemoIndex = -1;
       return;
     }
@@ -915,7 +939,17 @@ async function loadJson(path) {
     if (!audioEnabled || !radioPowered || !lastPointerLatLng) return;
 
     const { nearest, nearestIndex, nearestDistance } = findNearestMemo(lastPointerLatLng);
-    if (!nearest) return;
+    if (!nearest) {
+      audioElements.forEach(audio => { audio.volume = 0; });
+      if (noiseGain && audioCtx) {
+        noiseGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        noiseGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.10);
+      }
+      activeMemoIndex = -1;
+      syncNeedle(null);
+      updateStatus(t('statusPoweredOn'));
+      return;
+    }
 
     const silentKm = 0.42;
     const radioZoneKm = LISTENING_ZONE_KM;

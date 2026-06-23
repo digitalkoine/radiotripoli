@@ -520,10 +520,6 @@ html, body {
         0 0 0 4px rgba(241,199,107,0.32),
         0 0 18px rgba(241,199,107,0.62);
     }
-    .custom-place-icon.dimmed-route,
-    .custom-memo-icon.dimmed-route {
-      filter: grayscale(.45);
-    }
     .route-icon-badge {
       position: absolute;
       inset: 3px;
