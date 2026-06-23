@@ -58,17 +58,6 @@ async function loadJson(path) {
       mapCarto: 'Chiara OSM',
       mapOsmHot: 'OpenStreetMap locale',
       routeAll: 'Tutti i punti',
-<<<<<<< HEAD
-      routeCommunity: 'Filtro A',
-      routeEducation: 'Filtro B',
-      routeSocial: 'Filtro C',
-      routeDeparture: 'Filtro D',
-      routeAllIntro: 'Mostra tutti i luoghi e tutte le memorie.',
-      routeCommunityIntro: 'Dalla hara ai riti e ai luoghi comunitari: la città come spazio quotidiano e religioso.',
-      routeEducationIntro: 'Scuole, gallerie e istituzioni italiane: il rapporto tra formazione, città coloniale e vita ebraica.',
-      routeSocialIntro: 'Feste, musica, hotel e incontri: la Tripoli delle relazioni e del tempo libero.',
-      routeDepartureIntro: 'Il porto come soglia: migrazione, separazione e ricomposizione della comunità.',
-=======
       routeCommunity: 'Comunità',
       routeSocial: 'Vita sociale e culturale',
       routeEvents: 'Eventi',
@@ -76,7 +65,6 @@ async function loadJson(path) {
       routeCommunityIntro: 'Luoghi e memorie della vita comunitaria e religiosa.',
       routeSocialIntro: 'Scuole, cinema, musica, feste e spazi della socialità tripolina.',
       routeEventsIntro: 'Eventi storici, migrazioni e cesure nella vita della comunità.',
->>>>>>> 2a34d54 (Caricamento iniziale)
       routeHighlight: 'Punti evidenziati',
       routeExplore: 'Esplora liberamente la mappa: i punti del percorso restano in evidenza.',
       routeReset: 'Reset',
@@ -117,17 +105,6 @@ async function loadJson(path) {
       mapCarto: 'Light OSM',
       mapOsmHot: 'Local OpenStreetMap',
       routeAll: 'All points',
-<<<<<<< HEAD
-      routeCommunity: 'Filter A',
-      routeEducation: 'Filter B',
-      routeSocial: 'Filter C',
-      routeDeparture: 'Filter D',
-      routeAllIntro: 'Show all places and all memories.',
-      routeCommunityIntro: 'From the hara to rituals and community places: the city as everyday and religious space.',
-      routeEducationIntro: 'Schools, galleries, and Italian institutions: education, the colonial city, and Jewish life.',
-      routeSocialIntro: 'Parties, music, hotels, and encounters: Tripoli as a social city.',
-      routeDepartureIntro: 'The port as a threshold: migration, separation, and the community’s recomposition.',
-=======
       routeCommunity: 'Community',
       routeSocial: 'Social and cultural life',
       routeEvents: 'Events',
@@ -135,7 +112,6 @@ async function loadJson(path) {
       routeCommunityIntro: 'Places and memories of communal and religious life.',
       routeSocialIntro: 'Schools, cinemas, music, parties, and spaces of Tripolitanian social life.',
       routeEventsIntro: 'Historical events, migrations, and turning points in the life of the community.',
->>>>>>> 2a34d54 (Caricamento iniziale)
       routeHighlight: 'Highlighted points',
       routeExplore: 'Explore the map freely: the route points stay highlighted.',
       routeReset: 'Reset',
@@ -148,16 +124,9 @@ async function loadJson(path) {
   };
   const t = key => TEXT[lang][key] || TEXT.it[key] || key;
   const FILTER_BADGES = {
-<<<<<<< HEAD
-    community: 'A',
-    education: 'B',
-    social: 'C',
-    departure: 'D'
-=======
     community: 'C',
     social: 'S',
     events: 'E'
->>>>>>> 2a34d54 (Caricamento iniziale)
   };
 
   function filterBadge(key) {
@@ -169,15 +138,12 @@ async function loadJson(path) {
     ? 'Remembering Jewish Tripoli'
     : 'Ricordando la Tripoli ebraica';
 
-<<<<<<< HEAD
-=======
   if (params.has('route')) {
     const url = new URL(window.location.href);
     url.searchParams.delete('route');
     window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
   }
 
->>>>>>> 2a34d54 (Caricamento iniziale)
   function urlWithParam(key, value) {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
@@ -209,19 +175,6 @@ async function loadJson(path) {
       `;
     }
 
-<<<<<<< HEAD
-    const routeSelect = document.getElementById('routeSelect');
-    if (routeSelect) {
-      routeSelect.innerHTML = `
-        <option value="all">${t('routeAll')}</option>
-        <option value="community">${t('routeCommunity')}</option>
-        <option value="education">${t('routeEducation')}</option>
-        <option value="social">${t('routeSocial')}</option>
-        <option value="departure">${t('routeDeparture')}</option>
-      `;
-    }
-=======
->>>>>>> 2a34d54 (Caricamento iniziale)
   }
 
   function localized(item, itKey, enKey, fallback = '') {
@@ -421,10 +374,6 @@ async function loadJson(path) {
   MEMOS.forEach((item, index) => {
     const marker = L.marker([item.lon, item.lat], { icon: memoIcon });
     marker.bindPopup(renderPopup(item, true), popupOptions);
-<<<<<<< HEAD
-    marker.on('mouseover', () => { marker.openPopup(); });
-    marker.on('click', () => { marker.openPopup(); });
-=======
     marker.on('mouseover', () => {
       activeMemoIndex = index;
       marker.openPopup();
@@ -439,7 +388,6 @@ async function loadJson(path) {
     marker.on('popupclose', () => {
       if (activeMemoIndex === index) activeMemoIndex = -1;
     });
->>>>>>> 2a34d54 (Caricamento iniziale)
     marker.addTo(memosLayer);
 
     const audio = new Audio(item.audioUrl || '');
@@ -466,66 +414,19 @@ async function loadJson(path) {
   });
 
   const hotspotLayer = L.layerGroup(audioHotspots).addTo(map);
-<<<<<<< HEAD
-  const routeSelect = document.getElementById('routeSelect');
-  const routeResetBtn = document.getElementById('routeResetBtn');
-  const routeGuide = document.getElementById('routeGuide');
-  const routeState = {
-    key: 'all',
-    entries: allMarkerEntries
-  };
-=======
   const routeAllBtn = document.getElementById('routeAllBtn');
   const routeToggles = document.getElementById('routeToggles');
   const routeGuide = document.getElementById('routeGuide');
   const routeOrder = ['community', 'social', 'events'];
->>>>>>> 2a34d54 (Caricamento iniziale)
   const routeText = {
     community: {
       label: t('routeCommunity'),
       intro: t('routeCommunityIntro'),
-<<<<<<< HEAD
-      keywords: ['vita comunitaria', 'community life', 'hara', 'rituali', 'ritual', 'cimitero', 'cemetery']
-    },
-    education: {
-      label: t('routeEducation'),
-      intro: t('routeEducationIntro'),
-      keywords: ['scuola', 'school', 'scuole', 'education', 'dante', 'roma']
-=======
       filters: ['comunita', 'community']
->>>>>>> 2a34d54 (Caricamento iniziale)
     },
     social: {
       label: t('routeSocial'),
       intro: t('routeSocialIntro'),
-<<<<<<< HEAD
-      keywords: ['vita sociale', 'social life', 'hotel waddan', 'via g. collu', 'music', 'musica', 'galleria de bono', 'de bono gallery']
-    },
-    departure: {
-      label: t('routeDeparture'),
-      intro: t('routeDepartureIntro'),
-      keywords: ['migrazione', 'migration', 'porto', 'port']
-    }
-  };
-
-  function searchableText(item) {
-    return [
-      item.locationIt,
-      item.locationEn,
-      item.topicIt,
-      item.topicEn,
-      item.todayLocation,
-      item.title
-    ].filter(Boolean).join(' ').toLowerCase();
-  }
-
-  function routeMatches(item, key) {
-    if (key === 'all') return true;
-    const route = routeText[key];
-    if (!route) return true;
-    const text = searchableText(item);
-    return route.keywords.some(keyword => text.includes(keyword));
-=======
       filters: ['vita sociale e culturale', 'social and cultural life']
     },
     events: {
@@ -611,7 +512,6 @@ async function loadJson(path) {
       button.classList.toggle('is-active', active);
       button.setAttribute('aria-pressed', String(active));
     });
->>>>>>> 2a34d54 (Caricamento iniziale)
   }
 
   function entryLabel(entry) {
@@ -620,19 +520,12 @@ async function loadJson(path) {
     return topic && topic !== location ? `${location} · ${topic}` : location;
   }
 
-<<<<<<< HEAD
-  function setRouteMarkerIcon(entry, routeKey, active) {
-    const routeClass = routeKey !== 'all' && active ? ' in-route' : '';
-    const dimClass = routeKey !== 'all' && !active ? ' dimmed-route' : '';
-    const iconText = routeKey !== 'all' && active
-=======
   function setRouteMarkerIcon(entry, active) {
     const routeKey = entryRouteKey(entry.item);
     const filtered = !isAllRoute();
     const routeClass = filtered && active ? ' in-route' : '';
     const dimClass = filtered && !active ? ' dimmed-route' : '';
     const iconText = filtered && active
->>>>>>> 2a34d54 (Caricamento iniziale)
       ? `<span class="route-icon-badge route-${routeKey}">${escapeHtml(filterBadge(routeKey))}</span>`
       : '';
     const baseClass = entry.kind === 'place' ? 'custom-place-icon' : 'custom-memo-icon';
@@ -648,49 +541,29 @@ async function loadJson(path) {
 
   function updateRouteGuide() {
     if (!routeGuide) return;
-<<<<<<< HEAD
-    if (routeState.key === 'all') {
-=======
     if (isAllRoute()) {
->>>>>>> 2a34d54 (Caricamento iniziale)
       routeGuide.classList.remove('active');
       routeGuide.innerHTML = '';
       return;
     }
 
-<<<<<<< HEAD
-=======
     const selectedLabels = routeState.keys
       .map(key => routeText[key].label)
       .join(' · ');
->>>>>>> 2a34d54 (Caricamento iniziale)
     const points = routeState.entries
       .map(entry => `<li>${escapeHtml(entryLabel(entry))}</li>`)
       .join('');
     routeGuide.classList.add('active');
     routeGuide.innerHTML = `
-<<<<<<< HEAD
-=======
       <div class="route-summary">
         <span>${escapeHtml(t('routeHighlight'))}</span>
         <strong>${escapeHtml(pointCountText(routeState.entries.length))}</strong>
       </div>
       <div class="route-selected">${escapeHtml(selectedLabels)}</div>
->>>>>>> 2a34d54 (Caricamento iniziale)
       <ul class="filter-list">${points}</ul>
     `;
   }
 
-<<<<<<< HEAD
-  function applyRoute(key, fitSelection = false) {
-    routeState.key = routeText[key] ? key : 'all';
-    routeState.entries = allMarkerEntries.filter(entry => routeMatches(entry.item, routeState.key));
-
-    allMarkerEntries.forEach(entry => {
-      const active = routeState.key === 'all' || routeState.entries.includes(entry);
-      entry.marker.setOpacity(active ? 1 : 0.22);
-      setRouteMarkerIcon(entry, routeState.key, active);
-=======
   function applyRoute() {
     routeState.entries = isAllRoute()
       ? allMarkerEntries
@@ -701,7 +574,6 @@ async function loadJson(path) {
       entry.marker.setOpacity(active ? 1 : 0.22);
       setRouteMarkerIcon(entry, active);
       if (!active) entry.marker.closePopup();
->>>>>>> 2a34d54 (Caricamento iniziale)
       if (entry.hotspot) {
         entry.hotspot.setStyle({
           opacity: active ? 0.22 : 0.05,
@@ -710,23 +582,8 @@ async function loadJson(path) {
       }
     });
 
-<<<<<<< HEAD
-    if (routeSelect && routeSelect.value !== routeState.key) routeSelect.value = routeState.key;
-    if (routeResetBtn) routeResetBtn.disabled = routeState.key === 'all';
-    updateRouteGuide();
-
-    if (routeState.key === 'all') {
-      closeAllMemoPopups();
-      closeAllPlacePopups();
-      if (fitSelection && allBounds.isValid()) map.fitBounds(allBounds.pad(0.15));
-    } else if (fitSelection && routeState.entries.length) {
-      const routeBounds = L.featureGroup(routeState.entries.map(entry => entry.marker)).getBounds();
-      if (routeBounds.isValid()) map.fitBounds(routeBounds.pad(0.25));
-    }
-=======
     syncRouteControls();
     updateRouteGuide();
->>>>>>> 2a34d54 (Caricamento iniziale)
   }
 
   const allBounds = L.featureGroup([...placesLayer.getLayers(), ...memosLayer.getLayers()]).getBounds();
@@ -734,35 +591,8 @@ async function loadJson(path) {
     map.fitBounds(allBounds.pad(0.15));
   }
 
-<<<<<<< HEAD
-  if (routeSelect) {
-    const requestedRoute = params.get('route') || 'all';
-    routeSelect.value = routeText[requestedRoute] ? requestedRoute : 'all';
-    routeSelect.addEventListener('change', ev => {
-      const next = ev.target.value;
-      const url = new URL(window.location.href);
-      if (next === 'all') url.searchParams.delete('route');
-      else url.searchParams.set('route', next);
-      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-      applyRoute(next, false);
-    });
-  }
-
-  if (routeResetBtn) {
-    routeResetBtn.addEventListener('click', () => {
-      if (routeSelect) routeSelect.value = 'all';
-      const url = new URL(window.location.href);
-      url.searchParams.delete('route');
-      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-      applyRoute('all', true);
-    });
-  }
-
-  applyRoute(routeSelect ? routeSelect.value : 'all', false);
-=======
   renderRouteControls();
   applyRoute();
->>>>>>> 2a34d54 (Caricamento iniziale)
 
   document.getElementById('fitBtn').addEventListener('click', () => {
     if (allBounds.isValid()) map.fitBounds(allBounds.pad(0.15));
@@ -784,10 +614,7 @@ async function loadJson(path) {
   const MAX_INTERVIEW_VOLUME = 0.42;
   const MAX_RADIO_NOISE_VOLUME = 0.075;
   const RADIO_BOOST = 1.45;
-<<<<<<< HEAD
-=======
   const LISTENING_ZONE_KM = 0.26;
->>>>>>> 2a34d54 (Caricamento iniziale)
 
   function haversineKm(lat1, lon1, lat2, lon2) {
     const toRad = deg => deg * Math.PI / 180;
@@ -1065,8 +892,6 @@ async function loadJson(path) {
     return;
   }
 
-<<<<<<< HEAD
-=======
   function updateMemoPopupModel() {
     if (activeMemoIndex < 0 || !lastPointerLatLng) return;
     const activeEntry = memoMarkers[activeMemoIndex];
@@ -1086,7 +911,6 @@ async function loadJson(path) {
     }
   }
 
->>>>>>> 2a34d54 (Caricamento iniziale)
   function updatePointerAudioModel() {
     if (!audioEnabled || !radioPowered || !lastPointerLatLng) return;
 
@@ -1094,11 +918,7 @@ async function loadJson(path) {
     if (!nearest) return;
 
     const silentKm = 0.42;
-<<<<<<< HEAD
-    const radioZoneKm = 0.26;
-=======
     const radioZoneKm = LISTENING_ZONE_KM;
->>>>>>> 2a34d54 (Caricamento iniziale)
     const cleanZoneKm = 0.055;
 
     let baseRadio = 0;
@@ -1176,10 +996,7 @@ async function loadJson(path) {
     const point = L.point(ev.clientX - rect.left, ev.clientY - rect.top);
     lastPointerLatLng = map.containerPointToLatLng(point);
     updatePlacePopupModel();
-<<<<<<< HEAD
-=======
     updateMemoPopupModel();
->>>>>>> 2a34d54 (Caricamento iniziale)
     if (audioEnabled && radioPowered) updatePointerAudioModel();
   });
 
@@ -1195,29 +1012,12 @@ async function loadJson(path) {
   map.on('move zoom', () => {
     if (lastPointerLatLng) {
       updatePlacePopupModel();
-<<<<<<< HEAD
-=======
       updateMemoPopupModel();
->>>>>>> 2a34d54 (Caricamento iniziale)
       if (audioEnabled && radioPowered) updatePointerAudioModel();
     }
   });
 
-<<<<<<< HEAD
-  // Mostra i popup delle memorie solo da uno zoom medio in su
-  function updateMemoVisibility() {
-    const z = map.getZoom();
-    if (z >= 14) {
-      if (!map.hasLayer(memosLayer)) map.addLayer(memosLayer);
-    } else {
-      if (map.hasLayer(memosLayer)) map.removeLayer(memosLayer);
-    }
-  }
-  map.on('zoomend', updateMemoVisibility);
-  updateMemoVisibility();
-=======
   if (!map.hasLayer(memosLayer)) map.addLayer(memosLayer);
->>>>>>> 2a34d54 (Caricamento iniziale)
 })().catch(err => {
   console.error(err);
   const status = document.getElementById('status');

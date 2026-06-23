@@ -3,18 +3,6 @@
     "kind": "place",
     "locationIt": "Cimitero Ebraico",
     "locationEn": "Jewish Cemetery",
-<<<<<<< HEAD
-    "topicIt": "Vita comunitaria",
-    "topicEn": "Community life",
-    "contextIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "contextEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "lat": 13.165081113219362,
-    "lon": 32.89593878995753,
-    "title": "Community life",
-    "specificLocation": "Jewish Cemetery",
-    "descriptionIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "descriptionEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-=======
     "filterIt": "comunità",
     "filterEn": "community",
     "years": "Middle Ages - early 1970s",
@@ -31,24 +19,11 @@
     "descriptionIt": "L’antico cimitero ebraico di Tripoli, situato vicino alla Hara (il quartiere ebraico della città vecchia), risaliva al Medioevo. Dopo l’espulsione della minoranza ebraica libica nei primi anni Settanta, il cimitero fu spianato e cancellato dal paesaggio urbano.",
     "descriptionEn": "The ancient Jewish cemetery of Tripoli, located near the Hara (the Jewish quarter of the old city), dated back to the Middle Ages. Following the expulsion of Libya’s Jewish minority in the early 1970s, the cemetery was levelled and erased from the urban landscape.",
     "source": ""
->>>>>>> 2a34d54 (Caricamento iniziale)
   },
   {
     "kind": "place",
     "locationIt": "Scuola \"Roma\"",
     "locationEn": "School \"Roma\"",
-<<<<<<< HEAD
-    "topicIt": "Scuole",
-    "topicEn": "Education",
-    "contextIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "contextEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "lat": 13.181306976538371,
-    "lon": 32.89283299499973,
-    "title": "Education",
-    "specificLocation": "School \"Roma\"",
-    "descriptionIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "descriptionEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-=======
     "filterIt": "vita sociale e culturale",
     "filterEn": "social and cultural life",
     "years": "1911-1970",
@@ -86,24 +61,11 @@
     "descriptionIt": "La Scuola Pietro Verri fu fondata nel 1876 dal pedagogista ebreo italiano Giannetto Paggi di Pitigliano, su iniziativa di notabili ebrei libici. Nata per offrire un'istruzione in lingua italiana ai bambini ebrei della Hara, il quartiere ebraico della città vecchia di Tripoli.",
     "descriptionEn": "The Pietro Verri School was founded in 1876 by the Italian Jewish educator Giannetto Paggi of Pitigliano, at the initiative of prominent Libyan Jewish leaders. It was established to provide Italian-language education for Jewish children living in the Hara, the Jewish quarter of Tripoli’s old city.",
     "source": ""
->>>>>>> 2a34d54 (Caricamento iniziale)
   },
   {
     "kind": "place",
     "locationIt": "Galleria De Bono",
     "locationEn": "De Bono Gallery",
-<<<<<<< HEAD
-    "topicIt": "Vita sociale",
-    "topicEn": "Social life",
-    "contextIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "contextEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "lat": 13.181746858743237,
-    "lon": 32.89348163145261,
-    "title": "Vita sociale",
-    "specificLocation": "De Bono Gallery",
-    "descriptionIt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, a tincidunt justo facilisis a. Praesent sed libero vel ex tincidunt faucibus nec at nunc. Quisque vitae ligula in sapien.",
-    "descriptionEn": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-=======
     "filterIt": "vita sociale e culturale",
     "filterEn": "social and cultural life",
     "years": "1930s-1960s",
@@ -141,6 +103,5 @@
     "descriptionIt": "La scuola ebraica HaTikva di Tripoli, fondata negli anni Trenta, promuoveva l’insegnamento dell’ebraico, della storia e della cultura ebraica. Sostenuta da organizzazioni sioniste, offriva anche formazione professionale alle ragazze, contribuendo al rinnovamento culturale e sociale della comunità ebraica libica.",
     "descriptionEn": "The HaTikva Jewish school in Tripoli, founded in the 1930s, promoted the teaching of Hebrew, Jewish history, and Jewish culture. Supported by Zionist organizations, it also provided vocational training for girls, contributing to the cultural and social renewal of the Libyan Jewish community.",
     "source": "bibliography; http://archive.diarna.org/"
->>>>>>> 2a34d54 (Caricamento iniziale)
   }
 ]

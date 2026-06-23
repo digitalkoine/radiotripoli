@@ -28,10 +28,6 @@ Poi apri nel browser:
 - italiano: `http://127.0.0.1:8000/index-it.html`
 
 ## Nota
-<<<<<<< HEAD
-La mappa usa Leaflet da CDN e i dati del foglio `NEW sample data`.
-=======
 La mappa usa Leaflet da CDN e i dati del foglio `NEW data`.
->>>>>>> 2a34d54 (Caricamento iniziale)
 Le versioni linguistiche principali sono `index.html` (inglese) e `index-it.html` (italiano). I parametri `?lang=it` e `?lang=en` restano disponibili come override tecnico.
 Il basemap predefinito è ArcGIS/Esri World Street Map.

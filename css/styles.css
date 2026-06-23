@@ -19,21 +19,11 @@ html, body {
     .leaflet-container:active {
       cursor: grabbing !important;
     }
-<<<<<<< HEAD
-    .panel, .legend {
-      pointer-events: auto;
-    }
-    .panel {
-=======
     .top-right-stack {
->>>>>>> 2a34d54 (Caricamento iniziale)
       position: absolute;
       z-index: 650;
       top: 14px;
       right: 14px;
-<<<<<<< HEAD
-      width: min(360px, calc(100vw - 28px));
-=======
       width: min(440px, calc(100vw - 28px));
       display: grid;
       gap: 8px;
@@ -47,7 +37,6 @@ html, body {
       position: relative;
       width: 100%;
       box-sizing: border-box;
->>>>>>> 2a34d54 (Caricamento iniziale)
       background: linear-gradient(180deg, #70563a 0%, #5a422b 52%, #4a3422 100%);
       border: 2px solid rgba(36, 23, 12, 0.8);
       border-radius: 14px;
@@ -71,8 +60,6 @@ html, body {
       grid-template-columns: 48px 1fr 48px;
       gap: 10px;
       align-items: center;
-<<<<<<< HEAD
-=======
       margin-bottom: 0;
       min-width: 0;
     }
@@ -80,7 +67,6 @@ html, body {
       display: grid;
       gap: 8px;
       align-items: stretch;
->>>>>>> 2a34d54 (Caricamento iniziale)
       margin-bottom: 9px;
     }
     .knob-stack,
@@ -305,15 +291,6 @@ html, body {
       color: #f5e7cf;
       border: 1px solid rgba(255,255,255,0.08);
     }
-<<<<<<< HEAD
-    .map-tools,
-    .route-tools {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-=======
     .route-tools {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -325,31 +302,10 @@ html, body {
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 8px;
       background: rgba(35, 24, 16, 0.45);
->>>>>>> 2a34d54 (Caricamento iniziale)
       font-size: 12px;
       font-weight: 800;
       color: #f8e9c8;
     }
-<<<<<<< HEAD
-    .map-tools select,
-    .route-tools select {
-      min-width: 0;
-      height: 30px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: linear-gradient(180deg, #7f6644 0%, #634a31 100%);
-      color: #f5e7cf;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 0 10px;
-    }
-    .route-guide {
-      grid-column: 1 / -1;
-      display: none;
-      border: 1px solid rgba(208, 225, 172, 0.14);
-      border-radius: 10px;
-      background: rgba(28, 35, 25, 0.45);
-=======
     .route-title {
       grid-column: 1 / -1;
       font-size: 10px;
@@ -444,32 +400,16 @@ html, body {
       border-radius: 8px;
       background: rgba(28, 35, 25, 0.45);
       margin-top: 8px;
->>>>>>> 2a34d54 (Caricamento iniziale)
       padding: 8px;
       font-size: 11px;
       line-height: 1.35;
       color: #f5e7cf;
-<<<<<<< HEAD
-=======
       max-height: 185px;
       overflow: auto;
->>>>>>> 2a34d54 (Caricamento iniziale)
     }
     .route-guide.active {
       display: block;
     }
-<<<<<<< HEAD
-    .route-community {
-      --route-accent: #86d0bd;
-    }
-    .route-education {
-      --route-accent: #f0c76c;
-    }
-    .route-social {
-      --route-accent: #d7a0df;
-    }
-    .route-departure {
-=======
     .route-summary {
       display: flex;
       align-items: center;
@@ -500,7 +440,6 @@ html, body {
       --route-accent: #d7a0df;
     }
     .route-events {
->>>>>>> 2a34d54 (Caricamento iniziale)
       --route-accent: #9bb9e9;
     }
     .filter-list {
@@ -514,26 +453,6 @@ html, body {
       color: rgba(248,233,200,0.92);
       font-weight: 700;
     }
-<<<<<<< HEAD
-    #routeResetBtn {
-      padding: 7px 10px;
-      font-size: 11px;
-    }
-    #routeResetBtn:disabled {
-      opacity: .45;
-      cursor: default;
-    }
-    .legend {
-      position: absolute;
-      z-index: 650;
-      left: 14px;
-      bottom: 14px;
-      background: rgba(17, 17, 17, 0.88);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      padding: 10px 12px;
-      font-size: 12px;
-=======
     .legend {
       position: relative;
       justify-self: stretch;
@@ -549,7 +468,6 @@ html, body {
       padding: 11px 14px;
       font-size: 14px;
       font-weight: 750;
->>>>>>> 2a34d54 (Caricamento iniziale)
       line-height: 1.5;
       box-shadow: 0 8px 30px rgba(0,0,0,0.35);
     }
@@ -557,14 +475,6 @@ html, body {
       display: flex;
       align-items: center;
       gap: 8px;
-<<<<<<< HEAD
-      margin: 4px 0;
-    }
-    .dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-=======
       margin: 0;
       white-space: nowrap;
     }
@@ -573,7 +483,6 @@ html, body {
       height: 17px;
       border-radius: 50%;
       flex: 0 0 auto;
->>>>>>> 2a34d54 (Caricamento iniziale)
       display: inline-block;
     }
     .dot.place {
@@ -695,8 +604,6 @@ html, body {
       width: 100%;
       margin-top: 6px;
     }
-<<<<<<< HEAD
-=======
     @media (max-width: 640px) {
       .top-right-stack {
         top: 8px;
@@ -718,4 +625,3 @@ html, body {
         row-gap: 6px;
       }
     }
->>>>>>> 2a34d54 (Caricamento iniziale)
