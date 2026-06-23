@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remembering Jewish Tripoli</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+<<<<<<< HEAD
+  <div class="panel">
+    <div class="radio-face">
+      <div class="knob-stack">
+        <div class="knob-label">VOL</div>
+        <div id="volumeKnob" class="knob">
+          <div id="volumeIndicator" class="knob-indicator"></div>
+        </div>
+      </div>
+      <div class="tuning-stack">
+        <div class="knob-label">TUNING</div>
+        <div class="tuning-window">
+          <div class="tuning-line tuning-line-top"></div>
+          <div class="tuning-line tuning-line-bottom"></div>
+          <div class="tuning-numbers">
+            <span>55</span><span>70</span><span>90</span><span>110</span><span>140</span>
+          </div>
+          <div class="tuning-sub">
+            <span>kHz</span><span>AM</span><span></span><span></span><span>VOICE</span>
+          </div>
+          <div id="tuningNeedle"></div>
+        </div>
+      </div>
+      <div class="knob-stack">
+        <div class="knob-label">TONE</div>
+        <div id="toneKnob" class="knob">
+          <div id="toneIndicator" class="knob-indicator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-heading">
+      <h1 data-i18n="title">Remembering Jewish Tripoli</h1>
+    </div>
+    <p class="panel-intro" data-i18n="intro">Turn on the radio and cross the city: at the red points, memories of those who lived it surface; at the blue points, other places of Tripoli Jewish life are revealed.</p>
+    <div class="controls">
+      <label for="powerSwitch" class="power-control">
+        <span data-i18n="radio">Radio</span>
+        <span id="powerLabel">OFF</span>
+        <span class="power-shell">
+          <input id="powerSwitch" type="checkbox" />
+          <span class="power-track">
+            <span id="powerKnob"></span>
+          </span>
+        </span>
+      </label>
+      <button id="fitBtn" class="secondary" data-i18n="fit">Reset view</button>
+    </div>
+    <div class="route-tools">
+      <label for="routeSelect" data-i18n="route">Filters</label>
+      <select id="routeSelect"></select>
+      <button id="routeResetBtn" class="secondary" data-i18n="routeReset">Reset</button>
+      <div id="routeGuide" class="route-guide"></div>
+    </div>
+    <div id="status" class="status" aria-live="polite"></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memories of places</span></div>
+    <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Places of Tripoli's Jews</span></div>
+=======
+  <div class="top-right-stack">
+    <div class="panel">
+      <div class="panel-top">
+        <div class="radio-face">
+          <div class="knob-stack">
+            <div class="knob-label">VOL</div>
+            <div id="volumeKnob" class="knob">
+              <div id="volumeIndicator" class="knob-indicator"></div>
+            </div>
+          </div>
+          <div class="tuning-stack">
+            <div class="knob-label">TUNING</div>
+            <div class="tuning-window">
+              <div class="tuning-line tuning-line-top"></div>
+              <div class="tuning-line tuning-line-bottom"></div>
+              <div class="tuning-numbers">
+                <span>55</span><span>70</span><span>90</span><span>110</span><span>140</span>
+              </div>
+              <div class="tuning-sub">
+                <span>kHz</span><span>AM</span><span></span><span></span><span>VOICE</span>
+              </div>
+              <div id="tuningNeedle"></div>
+            </div>
+          </div>
+          <div class="knob-stack">
+            <div class="knob-label">TONE</div>
+            <div id="toneKnob" class="knob">
+              <div id="toneIndicator" class="knob-indicator"></div>
+            </div>
+          </div>
+        </div>
+        <div class="route-tools" aria-label="Filters">
+          <div class="route-title" data-i18n="route">Filters</div>
+          <button id="routeAllBtn" class="route-chip route-all" type="button" data-route="all" data-i18n="routeAll">All points</button>
+          <div id="routeToggles" class="route-toggle-grid"></div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h1 data-i18n="title">Remembering Jewish Tripoli</h1>
+      </div>
+      <p class="panel-intro" data-i18n="intro">Turn on the radio and cross the city: at the red points, memories of those who lived it surface; at the blue points, other places of Tripoli Jewish life are revealed.</p>
+      <div class="controls">
+        <label for="powerSwitch" class="power-control">
+          <span data-i18n="radio">Radio</span>
+          <span id="powerLabel">OFF</span>
+          <span class="power-shell">
+            <input id="powerSwitch" type="checkbox" />
+            <span class="power-track">
+              <span id="powerKnob"></span>
+            </span>
+          </span>
+        </label>
+        <button id="fitBtn" class="secondary" data-i18n="fit">Reset view</button>
+      </div>
+      <div id="routeGuide" class="route-guide"></div>
+      <div id="status" class="status" aria-live="polite"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-row"><span class="dot memo"></span> <span data-i18n="legendMemos">Memories of places</span></div>
+      <div class="legend-row"><span class="dot place"></span> <span data-i18n="legendPlaces">Places of Tripoli's Jews</span></div>
+    </div>
+>>>>>>> 2a34d54 (Caricamento iniziale)
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./data/app-data.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
