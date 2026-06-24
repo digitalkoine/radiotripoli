@@ -29,7 +29,7 @@ async function loadJson(path) {
   const TEXT = {
     it: {
       title: 'Ricordando la Tripoli ebraica',
-      intro: "Accendi la radio e attraversa la città: nei punti rossi affiorano le memorie di chi l'ha vissuta, nei punti blu si rivelano altri luoghi della vita ebraica tripolina.",
+      intro: 'Accendi la radio e attraversa la città: soffermandoti sui punti rossi puoi ascoltare le memorie di chi ha vissuto a Tripoli; i punti blu rivelano altri luoghi legati alla vita ebraica della città.',
       radio: 'Radio',
       fit: 'Reset vista',
       basemap: 'Mappa',
@@ -76,7 +76,7 @@ async function loadJson(path) {
     },
     en: {
       title: 'Remembering Jewish Tripoli',
-      intro: 'Turn on the radio and cross the city: at the red points, memories of those who lived it surface; at the blue points, other places of Tripoli Jewish life are revealed.',
+      intro: "Turn on the radio and make your way through the city: at the red markers, you can listen to the memories of those who once lived in Tripoli; at the blue markers, you'll discover other places connected to Jewish life in the city.",
       radio: 'Radio',
       fit: 'Reset view',
       basemap: 'Map',
@@ -198,7 +198,10 @@ async function loadJson(path) {
     autoPan: true,
     autoPanPaddingTopLeft: L.point(24, 24),
     autoPanPaddingBottomRight: L.point(panelWidth + 32, 24),
-    closeButton: true
+    closeButton: true,
+    keepInView: true,
+    minWidth: 240,
+    maxWidth: 410
   };
 
   const basemaps = {
@@ -283,18 +286,14 @@ async function loadJson(path) {
       .replace(/'/g, '&#039;');
   }
 
-  function shortenText(text, maxLength = 190) {
-    const content = String(text || '').trim();
-    if (!content || content.length <= maxLength) return content;
-    const clipped = content.slice(0, maxLength).replace(/\s+\S*$/, '');
-    return `${clipped}...`;
-  }
-
-  function renderTextBlock(text, className, options = {}) {
+  function renderTextBlock(text, className) {
     const content = String(text || '').trim();
     if (!content) return '';
-    const displayText = options.maxLength ? shortenText(content, options.maxLength) : content;
-    return `<div class="${className}"><p>${escapeHtml(displayText)}</p></div>`;
+    return `<div class="${className}"><p>${escapeHtml(content)}</p></div>`;
+  }
+
+  function renderMultilineText(text) {
+    return escapeHtml(text).replace(/\r?\n/g, '<br>');
   }
 
   function renderSource(item) {
@@ -314,7 +313,7 @@ async function loadJson(path) {
     const sourceText = String(source || '').trim();
     if (!transcript && !sourceText) return '';
     const transcriptBlock = transcript
-      ? `<p><strong>${escapeHtml(t('transcript'))}</strong><br>${escapeHtml(transcript)}</p>`
+      ? `<div class="transcript-body"><strong>${escapeHtml(t('transcript'))}</strong><p>${renderMultilineText(transcript)}</p></div>`
       : '';
     const sourceBlock = sourceText
       ? `<p class="source"><strong>${escapeHtml(t('source'))}:</strong> ${escapeHtml(sourceText)}</p>`
@@ -330,7 +329,6 @@ async function loadJson(path) {
 
   function renderPopup(item, isMemo = false) {
     const location = localized(item, 'locationIt', 'locationEn', 'specificLocation');
-    const topic = localized(item, 'topicIt', 'topicEn', 'title');
     const context = localized(item, 'contextIt', 'contextEn', 'description');
     const testimony = localized(item, 'testimonyIt', 'testimonyEn', 'descriptionIt');
     const source = localized(item, 'sourceIt', 'sourceEn', 'source');
@@ -345,8 +343,7 @@ async function loadJson(path) {
       <div class="popup-content">
         <h3>${escapeHtml(location)}</h3>
         ${years}
-        ${renderTextBlock(topic, 'popup-topic')}
-        ${renderTextBlock(context, 'popup-context', { maxLength: 170 })}
+        ${renderTextBlock(context, 'popup-context')}
         ${witnessBlock}
         ${readBlock}
       </div>
@@ -384,9 +381,32 @@ async function loadJson(path) {
     });
     marker.on('popupopen', () => {
       activeMemoIndex = index;
+      const popupElement = marker.getPopup()?.getElement();
+      if (popupElement && !popupElement.dataset.interactionReady) {
+        popupElement.dataset.interactionReady = 'true';
+        L.DomEvent.disableClickPropagation(popupElement);
+        L.DomEvent.disableScrollPropagation(popupElement);
+
+        popupElement.addEventListener('mouseenter', () => {
+          activeMemoIndex = index;
+          if (audioEnabled && radioPowered) updatePointerAudioModel();
+        });
+
+        popupElement.querySelectorAll('.popup-reading').forEach(details => {
+          details.addEventListener('toggle', () => {
+            if (details.open) activeMemoIndex = index;
+            marker.getPopup()?.update();
+            if (audioEnabled && radioPowered) updatePointerAudioModel();
+          });
+        });
+      }
+      if (audioEnabled && radioPowered) updatePointerAudioModel();
     });
     marker.on('popupclose', () => {
-      if (activeMemoIndex === index) activeMemoIndex = -1;
+      if (activeMemoIndex === index) {
+        activeMemoIndex = -1;
+        if (audioEnabled && radioPowered && lastPointerLatLng) updatePointerAudioModel();
+      }
     });
     marker.addTo(memosLayer);
 
@@ -523,9 +543,7 @@ async function loadJson(path) {
   }
 
   function entryLabel(entry) {
-    const location = localized(entry.item, 'locationIt', 'locationEn', 'specificLocation');
-    const topic = localized(entry.item, 'topicIt', 'topicEn', 'title');
-    return topic && topic !== location ? `${location} · ${topic}` : location;
+    return localized(entry.item, 'locationIt', 'locationEn', 'specificLocation');
   }
 
   function setRouteMarkerIcon(entry, active) {
@@ -826,23 +844,21 @@ async function loadJson(path) {
       return false;
     }
 
-    try {
-      await audioCtx.resume();
-    } catch (e) {
+    audioCtx.resume().catch(e => {
       console.warn('Resume AudioContext fallito', e);
-    }
+    });
 
-    let started = 0;
-    for (const audio of audioElements) {
-      if (!audio.src) continue;
+    const playAttempts = audioElements.map(async audio => {
+      if (!audio.src) return false;
+      audio.volume = 0;
       try {
         await audio.play();
-        audio.volume = 0;
-        started += 1;
+        return true;
       } catch (e) {
         console.warn('Audio non avviato:', audio.src, e);
+        return false;
       }
-    }
+    });
 
     audioEnabled = true;
     radioPowered = true;
@@ -851,9 +867,11 @@ async function loadJson(path) {
     syncControlKnobs();
     if (lastPointerLatLng) updatePointerAudioModel();
 
-    if (started === 0) {
-      updateStatus(t('statusAudioBlocked'), true);
-    }
+    Promise.all(playAttempts).then(results => {
+      if (!results.some(Boolean) && radioPowered) {
+        updateStatus(t('statusAudioBlocked'), true);
+      }
+    });
     return true;
   }
 
@@ -916,21 +934,10 @@ async function loadJson(path) {
   }
 
   function updateMemoPopupModel() {
-    if (activeMemoIndex < 0 || !lastPointerLatLng) return;
+    if (activeMemoIndex < 0) return;
     const activeEntry = memoMarkers[activeMemoIndex];
     if (!activeEntry || !activeEntry.routeActive) {
       if (activeEntry) activeEntry.marker.closePopup();
-      activeMemoIndex = -1;
-      return;
-    }
-    const distance = haversineKm(
-      lastPointerLatLng.lat,
-      lastPointerLatLng.lng,
-      activeEntry.item.lon,
-      activeEntry.item.lat
-    );
-    if (distance > LISTENING_ZONE_KM) {
-      activeEntry.marker.closePopup();
       activeMemoIndex = -1;
     }
   }
@@ -938,7 +945,16 @@ async function loadJson(path) {
   function updatePointerAudioModel() {
     if (!audioEnabled || !radioPowered || !lastPointerLatLng) return;
 
-    const { nearest, nearestIndex, nearestDistance } = findNearestMemo(lastPointerLatLng);
+    const pinnedEntry = activeMemoIndex >= 0 ? memoMarkers[activeMemoIndex] : null;
+    const hasPinnedPopup = !!(
+      pinnedEntry &&
+      pinnedEntry.routeActive &&
+      pinnedEntry.marker.isPopupOpen()
+    );
+    const nearestResult = hasPinnedPopup
+      ? { nearest: pinnedEntry, nearestIndex: activeMemoIndex, nearestDistance: 0 }
+      : findNearestMemo(lastPointerLatLng);
+    const { nearest, nearestIndex, nearestDistance } = nearestResult;
     if (!nearest) {
       audioElements.forEach(audio => { audio.volume = 0; });
       if (noiseGain && audioCtx) {

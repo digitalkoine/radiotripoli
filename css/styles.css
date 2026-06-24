@@ -541,9 +541,16 @@ html, body {
     .leaflet-popup-content-wrapper {
       border-radius: 14px;
     }
+    .leaflet-popup-content {
+      max-height: calc(100vh - 92px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+    }
     .popup-content {
+      width: min(360px, calc(100vw - 76px));
       min-width: 220px;
-      max-width: 320px;
+      max-width: 360px;
     }
     .popup-content h3 {
       margin: 0 0 6px;
@@ -569,8 +576,8 @@ html, body {
       font-size: 13px;
       line-height: 1.45;
     }
-    .popup-topic p {
-      font-weight: 700;
+    .popup-context p {
+      white-space: pre-line;
     }
     .popup-witness {
       font-weight: 800;
@@ -586,11 +593,17 @@ html, body {
       font-size: 12px;
       font-weight: 800;
       margin-bottom: 6px;
+      padding: 3px 0;
     }
-    .popup-reading p {
-      max-height: 150px;
+    .transcript-body {
+      margin-top: 8px;
+    }
+    .transcript-body p {
+      max-height: 260px;
       overflow: auto;
       padding-right: 4px;
+      white-space: normal;
+      overscroll-behavior: contain;
     }
     .source {
       color: #555;
